@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b6b">
+    <title>Ehab Emad | State Demo</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="new-index.html" class="logo">Ehab Emad</a>
+                <ul class="nav-list">
+                    <li><a href="new-index.html" class="nav-link">Home</a></li>
+                    <li><a href="new-about.html" class="nav-link">About</a></li>
+                    <li><a href="new-portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="new-contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="new-state.html" class="nav-link">State</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>State Management Demo</h1>
+            <p>Interactive examples of state management with localStorage</p>
+        </div>
+    </section>
+
+    <!-- State Section -->
+    <section class="section state-section">
+        <div class="container">
+            <div class="state-container">
+                <h3>Interactive Counter</h3>
+                <p>This counter remembers its value even if you navigate away and come back to this page. The state is stored in your browser's localStorage.</p>
+                
+                <div class="counter-container">
+                    <div id="counter-display" class="counter-display">0</div>
+                    <div class="counter-buttons">
+                        <button id="decrement-btn" class="btn">Decrement</button>
+                        <button id="reset-btn" class="btn" style="background-color: #333;">Reset</button>
+                        <button id="increment-btn" class="btn">Increment</button>
+                    </div>
+                </div>
+                
+                <h3>Theme Switcher</h3>
+                <p>Change the accent color of the website. Your selection will be remembered across all pages.</p>
+                
+                <div class="theme-container">
+                    <p>Current theme: <span id="current-theme">Red</span></p>
+                    <div class="theme-options">
+                        <div class="theme-option theme-red active" title="Red"></div>
+                        <div class="theme-option theme-blue" title="Blue"></div>
+                        <div class="theme-option theme-green" title="Green"></div>
+                        <div class="theme-option theme-purple" title="Purple"></div>
+                    </div>
+                </div>
+                
+                <h3>Persistent Notes</h3>
+                <p>Type notes here that will be saved automatically when you leave the page.</p>
+                
+                <div class="notes-container">
+                    <textarea id="notes-textarea" class="form-control" rows="5" placeholder="Type your notes here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button id="save-notes" class="btn">Save Notes</button>
+                        <button id="clear-notes" class="btn" style="background-color: #333;">Clear Notes</button>
+                    </div>
+                </div>
+                
+                <h3>Visit Counter</h3>
+                <p>This counter tracks how many times you've visited this page.</p>
+                
+                <div class="visit-counter">
+                    <p>You have visited this page <span id="visit-count">0</span> times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="how-it-works">
+                <div class="code-explanation scroll-element">
+                    <h3>localStorage API</h3>
+                    <p>The demos on this page use the browser's localStorage API to persist data between page visits. Here's a simplified example of how it works:</p>
+                    <pre><code>
+// Store data
+localStorage.setItem('key', 'value');
+
+// Retrieve data
+const value = localStorage.getItem('key');
+
+// Remove data
+localStorage.removeItem('key');
+
+// Clear all data
+localStorage.clear();
+                    </code></pre>
+                    <p>localStorage is a simple key-value store that persists even when the browser is closed and reopened. It's perfect for small amounts of data that need to be remembered across sessions.</p>
+                </div>
+                
+                <div class="code-explanation scroll-element">
+                    <h3>State Management in JavaScript</h3>
+                    <p>State management is a critical concept in modern web development. Here's how the counter example works:</p>
+                    <pre><code>
+// Initialize state from localStorage or default value
+let count = localStorage.getItem('counter') 
+    ? parseInt(localStorage.getItem('counter')) 
+    : 0;
+
+// Update the UI to reflect the current state
+counterDisplay.textContent = count;
+
+// Update state and UI when user interacts
+incrementBtn.addEventListener('click', () => {
+    count++;
+    counterDisplay.textContent = count;
+    localStorage.setItem('counter', count);
+});
+                    </code></pre>
+                    <p>This pattern of initializing from stored state, updating the UI, and saving changes is fundamental to creating persistent web applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Ehab Emad</div>
+                <p class="footer-text">Creating digital experiences that make a difference.</p>
+                <ul class="footer-links">
+                    <li><a href="new-index.html" class="footer-link">Home</a></li>
+                    <li><a href="new-about.html" class="footer-link">About</a></li>
+                    <li><a href="new-portfolio.html" class="footer-link">Portfolio</a></li>
+                    <li><a href="new-contact.html" class="footer-link">Contact</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/Ehab05" class="social-link"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="copyright">&copy; 2025 Ehab Emad. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Visit counter
+            let visitCount = localStorage.getItem('visitCount') ? parseInt(localStorage.getItem('visitCount')) : 0;
+            visitCount++;
+            document.getElementById('visit-count').textContent = visitCount;
+            localStorage.setItem('visitCount', visitCount);
+            
+            // Theme display
+            const currentTheme = document.getElementById('current-theme');
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                currentTheme.textContent = savedTheme.charAt(0).toUpperCase() + savedTheme.slice(1);
+                
+                // Update active state on theme options
+                const themeOptions = document.querySelectorAll('.theme-option');
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.classList.contains(`theme-${savedTheme}`)) {
+                        option.classList.add('active');
+                    }
+                });
+            }
+            
+            // Theme switching
+            const themeOptions = document.querySelectorAll('.theme-option');
+            themeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    themeOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Get theme from class
+                    const themeClasses = Array.from(this.classList);
+                    const themeClass = themeClasses.find(cls => cls.startsWith('theme-'));
+                    
+                    if (themeClass) {
+                        const theme = themeClass.replace('theme-', '');
+                        currentTheme.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+                        
+                        // Apply theme using the global theme manager
+                        window.themeManager.applyTheme(theme);
+                    }
+                });
+            });
+            
+            // Use the applyTheme function from main.js instead of redefining it here
+            // This ensures consistent theme application across all pages
+            // The function in main.js will handle updating all necessary elements
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3498db">
+    <title>Ehab Emad | State</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">Ehab Emad</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="state.html" class="nav-link">State</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">State Management Demo</h2>
+            <p class="text-center">This page demonstrates simple state management using JavaScript. The state persists between page visits using localStorage.</p>
+            
+            <div class="state-container">
+                <h3>Counter Example</h3>
+                <p>This counter remembers its value even if you navigate away and come back.</p>
+                
+                <div class="counter-container">
+                    <div id="counter-display" class="counter-display">0</div>
+                    <div class="counter-buttons">
+                        <button id="decrement" class="counter-btn">Decrement</button>
+                        <button id="reset" class="counter-btn">Reset</button>
+                        <button id="increment" class="counter-btn">Increment</button>
+                    </div>
+                </div>
+                
+                <h3>Theme Color Selector</h3>
+                <p>Select a theme color for the website. Your choice will be remembered across pages.</p>
+                
+                <div class="color-theme">
+                    <p>Current theme: <span id="current-theme">Blue</span></p>
+                    <div class="theme-buttons">
+                        <button class="theme-btn blue" data-color="#3498db" data-name="Blue"></button>
+                        <button class="theme-btn green" data-color="#2ecc71" data-name="Green"></button>
+                        <button class="theme-btn purple" data-color="#9b59b6" data-name="Purple"></button>
+                        <button class="theme-btn orange" data-color="#e67e22" data-name="Orange"></button>
+                    </div>
+                </div>
+                
+                <h3>Form Data Persistence</h3>
+                <p>This form remembers what you type, even if you navigate away.</p>
+                
+                <form id="persistent-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="persistent-name">Name</label>
+                        <input type="text" id="persistent-name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="persistent-email">Email</label>
+                        <input type="email" id="persistent-email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="persistent-message">Notes</label>
+                        <textarea id="persistent-message" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="button" id="save-form" class="btn">Save Data</button>
+                    <button type="button" id="clear-form" class="btn" style="background-color: #e74c3c;">Clear Data</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://t.me/Ehab05"><i class="fab fa-telegram-plane"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="#"><i class="fab fa-github"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+            <p>&copy; 2025 Ehab Emad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form persistence
+            const nameInput = document.getElementById('persistent-name');
+            const emailInput = document.getElementById('persistent-email');
+            const messageInput = document.getElementById('persistent-message');
+            const saveButton = document.getElementById('save-form');
+            const clearButton = document.getElementById('clear-form');
+            
+            // Load saved form data if it exists
+            if (localStorage.getItem('formData')) {
+                const formData = JSON.parse(localStorage.getItem('formData'));
+                nameInput.value = formData.name || '';
+                emailInput.value = formData.email || '';
+                messageInput.value = formData.message || '';
+            }
+            
+            // Save form data
+            saveButton.addEventListener('click', function() {
+                const formData = {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    message: messageInput.value
+                };
+                
+                localStorage.setItem('formData', JSON.stringify(formData));
+                alert('Form data saved successfully!');
+            });
+            
+            // Clear form data
+            clearButton.addEventListener('click', function() {
+                localStorage.removeItem('formData');
+                nameInput.value = '';
+                emailInput.value = '';
+                messageInput.value = '';
+                alert('Form data cleared!');
+            });
+            
+            // Apply theme from localStorage to all pages
+            function applyTheme() {
+                const storedColor = localStorage.getItem('primaryColor');
+                const storedName = localStorage.getItem('themeName');
+                
+                if (storedColor) {
+                    document.documentElement.style.setProperty('--primary-color', storedColor);
+                    
+                    // Update theme name display if on state page
+                    const currentTheme = document.getElementById('current-theme');
+                    if (currentTheme) {
+                        currentTheme.textContent = storedName || 'Blue';
+                    }
+                }
+            }
+            
+            // Apply theme on page load
+            applyTheme();
+        });
+    </script>
+</body>
+</html>
